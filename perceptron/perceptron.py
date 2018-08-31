@@ -117,4 +117,4 @@ if __name__ == "__main__":
     train(training_data)
     accuracy = test(testing_data)
 
-    print("The accuracy is %f", accuracy)
+    print("The accuracy is ", accuracy)
