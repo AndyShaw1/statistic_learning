@@ -6,7 +6,17 @@ import numpy as np
 import operator as opt
 
 class Kdtree(object):
+    '''
+    class: Kdtree
+    used to save kd-tree nodes which generated through train data
 
+    member:
+    __value: train data node value
+     __type: train data type
+      __dim: split plane dimension
+       left: left child
+      right: right child
+    '''
     def __init__(self, node = None, node_type = -1, dim = 0, left = None, right = None):
         self.__value = node
         self.__type  = node_type
@@ -27,6 +37,10 @@ class Kdtree(object):
         return self.__dim
 
     def distance(self, node):
+        '''
+        calculate distance between self-node and node
+        param: node: a test or train node value
+        '''
         if node == None:
             return sys.maxsize
 
@@ -35,11 +49,13 @@ class Kdtree(object):
             dis = dis + (self.__value[i] - node.__value[i]) ** 2
         return dis
 
-    def equal(self, node):
-        return opt.eq(self.__value, node.value)
-
     def build_tree(self, nodes, dim = 0):
-    
+        '''
+        build a kd-tree use train data set
+        param: nodes: train data set
+                 dim: split plane dimension
+        return: a kd-tree
+        '''
         if len(nodes) == 0:
             return None
         elif len(nodes) == 1:
@@ -67,6 +83,11 @@ class Kdtree(object):
         return self
 
     def find_type(self, fnode):
+        '''
+        find the fnode's type 
+        param: fnode: which node needed to find type
+        return: fnode's nearest node and type
+        '''
         if fnode == None:
             return self, -1
 
@@ -84,7 +105,7 @@ class Kdtree(object):
             else:
                 currentNode = currentNode.right
     
-        #
+        #the last node in path is the leaf node
         nearestNode = path[-1]
         nearestDist = fNode.distance(nearestNode)
         path = path[:-1]
