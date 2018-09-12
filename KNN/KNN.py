@@ -3,7 +3,6 @@
 
 import sys
 import numpy as np
-import operator as opt
 
 class Kdtree(object):
     '''
