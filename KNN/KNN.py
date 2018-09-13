@@ -68,12 +68,13 @@ class Kdtree(object):
     
         #get node
         midNode      = sortNodes[len(sortNodes) // 2]
+        sortNodes.remove(midNode)
         self.__value = midNode[:-1]
         self.__type  = midNode[-1]
         self.__dim   = dim
     
-        leftNodes  = list(filter(lambda x: x[dim] < midNode[dim], sortNodes[:len(sortNodes) // 2]))
-        rightNodes = list(filter(lambda x: x[dim] >= midNode[dim], sortNodes[len(sortNodes) // 2 + 1:]))
+        leftNodes  = list(filter(lambda x: x[dim] < midNode[dim], sortNodes))
+        rightNodes = list(filter(lambda x: x[dim] >= midNode[dim], sortNodes))
         nextDim    = (dim + 1) % (len(midNode) - 1)
     
         self.left  = Kdtree().build_tree(leftNodes, nextDim)
